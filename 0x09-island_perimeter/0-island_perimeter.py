@@ -1,33 +1,32 @@
+#!/usr/bin/python3
+""" Module that contains the island_perimeter function """
+
+
 def island_perimeter(grid):
-    """
-    Calculate the perimeter of the island in the grid.
-    
+    """ Function that returns the perimeter of island described in grid
     Args:
-    grid (List[List[int]]): A 2D list representing the grid, where
-                            0 represents water and 1 represents land.
-    
+        grid (list[list(int)]): An island
+
     Returns:
-    int: The perimeter of the island.
+        perimeter (int): Perimeter of the island.
+
     """
-    rows = len(grid)
-    cols = len(grid[0])
     perimeter = 0
 
-    for i in range(rows):
-        for j in range(cols):
-            if grid[i][j] == 1:  # Found a land cell
-                # Start with 4 sides
-                perimeter += 4
-                
-                # Check for adjacent land cells and subtract sides
-                if i > 0 and grid[i - 1][j] == 1:  # Top neighbor
-                    perimeter -= 1
-                if i < rows - 1 and grid[i + 1][j] == 1:  # Bottom neighbor
-                    perimeter -= 1
-                if j > 0 and grid[i][j - 1] == 1:  # Left neighbor
-                    perimeter -= 1
-                if j < cols - 1 and grid[i][j + 1] == 1:  # Right neighbor
-                    perimeter -= 1
-    
-    return perimeter
+    if grid != []:
+        nColumns = len(grid[0])
+        nRows = len(grid)
 
+    for a in range(nRows):
+        for b in range(nColumns):
+            if grid[a][b] == 1:
+                if (a - 1) == -1 or grid[a - 1][b] == 0:
+                    perimeter += 1
+                if (a + 1) == nRows or grid[a + 1][b] == 0:
+                    perimeter += 1
+                if (b - 1) == -1 or grid[a][b - 1] == 0:
+                    perimeter += 1
+                if (b + 1) == nColumns or grid[a][b + 1] == 0:
+                    perimeter += 1
+
+    return perimeter
